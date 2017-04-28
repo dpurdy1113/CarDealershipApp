@@ -1,0 +1,20 @@
+<div id="searchDiv">
+    <div id="searchInnerDiv">
+        <input ng-model="search" ng-model-options="{debounce:200}" placeholder="Search Inventory" />
+    </div>
+</div>
+<div id="selectionform">
+    <h3>
+        Search By Category
+    </h3>
+    <div>
+        <select ng-model="selectedMake">
+            <option value="" placeholder="Select the Make of the Car">Select the Make of the Car</option>
+            <option ng-repeat="make in controller.make" value="{{make.id}}">{{make.name}}</option>
+        </select>
+    </div>
+    <br />
+    <ul id="carlist" ng-repeat="car in controller.car|filter:search|filter:{carMakeId:selectedMake}">
+        <li>{{car.shortDescription}} <img class= "img-circle" ng-src="{{car.imageUrl}}"/><button class="btn btn-default" ng-click="controller.showModal(car.id)">Details</button></li>
+    </ul>
+</div>
